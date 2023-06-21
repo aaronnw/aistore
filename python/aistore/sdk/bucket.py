@@ -350,7 +350,7 @@ class Bucket(AISSource):
             raise ValueError("`flt_presence` must be one of 0, 1, 2, 3, 4, or 5.")
 
         params = self.qparam.copy()
-        params.update({QPARAM_FLT_PRESENCE: flt_presence})
+        params.update({QPARAM_FLT_PRESENCE: flt_presence, "count_remote_objs": True})
 
         response = self.client.request(
             HTTP_METHOD_HEAD,
