@@ -343,7 +343,13 @@ class TestBucketOps(RemoteEnabledTest):
         self.assertEqual(bck_summ["name"], "info-test")
 
         # Upload an object to the bucket
-        info_test_bck.object("test-object").put_content("test-content")
+        obj = info_test_bck.object("test-object")
+
+        obj.put_content("test-content")
+
+        print("Object content", obj.get().read_all().decode("utf-8"))
+
+
 
         # Sleep and request frequency in sec (starts at 100 ms)
         sleep_time = 0.1
@@ -362,6 +368,7 @@ class TestBucketOps(RemoteEnabledTest):
             sleep_time = min(
                 2, sleep_time * 1.5
             )  # Increase sleep_time by 50%, but don't exceed 2 seconds
+            count += 1
 
         print("Summary: ", bck_summ)
 
