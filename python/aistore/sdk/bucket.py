@@ -358,6 +358,8 @@ class Bucket(AISSource):
             params=params,
         )
 
+        print("headers:", response.headers)
+
         bucket_props = json.loads(response.headers.get(HEADER_BUCKET_PROPS, "{}"))
         bucket_summ = json.loads(response.headers.get(HEADER_BUCKET_SUMM, "{}"))
 

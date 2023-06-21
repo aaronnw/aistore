@@ -348,8 +348,10 @@ class TestBucketOps(RemoteEnabledTest):
         # Sleep and request frequency in sec (starts at 100 ms)
         sleep_time = 0.1
         max_retry_time = 2  # 2 seconds
+        count = 1
 
         while sleep_time < max_retry_time:
+            print("try ", count)
             _, bck_summ = info_test_bck.info(flt_presence=0)
 
             if bck_summ["ObjCount"]["obj_count_present"] == "1":
@@ -360,6 +362,8 @@ class TestBucketOps(RemoteEnabledTest):
             sleep_time = min(
                 2, sleep_time * 1.5
             )  # Increase sleep_time by 50%, but don't exceed 2 seconds
+
+        print("Summary: ", bck_summ)
 
         # Now we should have one object and non-zero size
         self.assertEqual(bck_summ["ObjCount"]["obj_count_present"], "1")
