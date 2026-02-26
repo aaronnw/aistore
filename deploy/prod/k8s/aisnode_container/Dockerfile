@@ -22,7 +22,7 @@ RUN GOOS=${TARGETOS} GOARCH=${TARGETARCH} \
     make node
 
 
-FROM --platform=${TARGETPLATFORM:-linux/amd64} ${BASE_IMAGE} as base
+FROM ${BASE_IMAGE}
 
 COPY --from=builder /go/bin/aisnode /usr/bin/aisnode
 

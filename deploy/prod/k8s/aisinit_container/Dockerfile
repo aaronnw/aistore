@@ -15,7 +15,7 @@ ARG TARGETARCH
 
 RUN CGO_ENABLED=0 GOOS=${TARGETOS} GOARCH=${TARGETARCH} make aisinit
 
-FROM --platform=${TARGETPLATFORM:-linux/amd64} ${BASE_IMAGE} as base
+FROM ${BASE_IMAGE}
 
 COPY --from=builder /go/bin/aisinit /usr/bin
 
