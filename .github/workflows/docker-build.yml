@@ -65,4 +65,4 @@ jobs:
           COMMIT_SHA="${{ inputs.commit_sha }}" \
           BUILD_TAGS="${{ inputs.build_tags }}" \
           ${{ inputs.extra_env }} \
-          make -e ${{ inputs.multiarch && 'all-multiarch' || 'all' }}
+          make -e ${{ inputs.multiarch && 'docker-buildx-multiarch' || 'all' }}

@@ -61,10 +61,9 @@ push:
 	$(DOCKER) push $(REGISTRY_URL)/$(IMAGE_REPO):$(IMAGE_TAG)
 
 # Build and push for all target platforms
-# Requires a container runtime that can support multi-platform builds
-.PHONY: all-multiarch
-all-multiarch:
-	$(DOCKER) build \
+.PHONY: docker-buildx-multiarch
+docker-buildx-multiarch:
+	$(DOCKER) buildx build \
 		--platform $(PLATFORMS) \
 		--push \
 		-f Dockerfile \
