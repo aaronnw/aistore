@@ -2,16 +2,8 @@
 # Dockerfile to build an aisnode Docker image
 #
 
-ARG INSTALLER_IMAGE=debian:bookworm
-ARG BUILDER_IMAGE=golang:1.25
-ARG BASE_IMAGE=gcr.io/distroless/base-debian12
-
-
-FROM --platform=${TARGETPLATFORM:-linux/amd64} ${INSTALLER_IMAGE} as installer
-
-RUN apt-get update -yq && apt-get install -y --no-install-recommends \
-    ca-certificates
-
+ARG BUILDER_IMAGE=docker.io/library/golang:1.25
+ARG BASE_IMAGE=gcr.io/distroless/base-debian12:nonroot
 
 FROM --platform=${BUILDPLATFORM:-linux/amd64} ${BUILDER_IMAGE} AS builder
 
@@ -31,8 +23,6 @@ RUN GOOS=${TARGETOS} GOARCH=${TARGETARCH} \
 
 
 FROM --platform=${TARGETPLATFORM:-linux/amd64} ${BASE_IMAGE} as base
-
-COPY --from=installer /etc/ssl/certs /etc/ssl/certs
 
 COPY --from=builder /go/bin/aisnode /usr/bin/aisnode
 
