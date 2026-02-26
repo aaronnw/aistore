@@ -6,7 +6,7 @@ on:
       image_name:
         required: true
         type: string
-        description: 'Image repository (e.g. aistorage/aisnode)'
+        description: 'Image repository (e.g. aaronnw/aisnode)'
       image_tag:
         required: true
         type: string
