@@ -12,37 +12,37 @@ on:
         default: true
 
       build_aisnode_image:
-        description: 'Build aisnode image (aistorage/aisnode)'
+        description: 'Build aisnode image (aaronnw/aisnode)'
         required: true
         type: boolean
         default: false
 
       build_aisinit_image:
-        description: 'Build aisinit image (aistorage/ais-init)'
+        description: 'Build aisinit image (aaronnw/ais-init)'
         required: true
         type: boolean
         default: false
 
       build_authn_image:
-        description: 'Build AuthN image (aistorage/authn)'
+        description: 'Build AuthN image (aaronnw/authn)'
         required: true
         type: boolean
         default: false
 
       build_util_image:
-        description: 'Build ais-util image (aistorage/ais-util)'
+        description: 'Build ais-util image (aaronnw/ais-util)'
         required: true
         type: boolean
         default: false
 
       build_cluster_minimal_image:
-        description: 'Build cluster-minimal image (aistorage/cluster-minimal)'
+        description: 'Build cluster-minimal image (aaronnw/cluster-minimal)'
         required: true
         type: boolean
         default: false
 
       build_gitlab_ci_image:
-        description: 'Build GitLab CI image (aistorage/gitlab-ci)'
+        description: 'Build GitLab CI image (aaronnw/gitlab-ci)'
         required: true
         type: boolean
         default: false
@@ -58,7 +58,7 @@ jobs:
     if: ${{ inputs.build_aisnode_image || github.event_name == 'push' }}
     uses: ./.github/workflows/docker-build.yml
     with:
-      image_name: aistorage/aisnode
+      image_name: aaronnw/aisnode
       image_tag: ${{ inputs.image_tag || 'dev' }}
       context_dir: deploy/prod/k8s/aisnode_container
       commit_sha: ${{ github.sha }}
@@ -71,7 +71,7 @@ jobs:
     if: ${{ inputs.build_aisnode_image || github.event_name == 'push' }}
     uses: ./.github/workflows/docker-build.yml
     with:
-      image_name: aistorage/aisnode
+      image_name: aaronnw/aisnode
       image_tag: ${{ inputs.image_tag && format('{0}-oteltracing', inputs.image_tag) || 'dev-oteltracing' }}
       context_dir: deploy/prod/k8s/aisnode_container
       build_tags: oteltracing
@@ -85,7 +85,7 @@ jobs:
     if: ${{ inputs.build_aisinit_image || github.event_name == 'push' }}
     uses: ./.github/workflows/docker-build.yml
     with:
-      image_name: aistorage/ais-init
+      image_name: aaronnw/ais-init
       image_tag: ${{ inputs.image_tag || 'dev' }}
       context_dir: deploy/prod/k8s/aisinit_container
       commit_sha: ${{ github.sha }}
@@ -98,7 +98,7 @@ jobs:
     if: ${{ inputs.build_authn_image }}
     uses: ./.github/workflows/docker-build.yml
     with:
-      image_name: aistorage/authn
+      image_name: aaronnw/authn
       image_tag: ${{ inputs.image_tag }}
       context_dir: deploy/prod/k8s/authn_container
     secrets:
@@ -109,7 +109,7 @@ jobs:
     if: ${{ inputs.build_util_image }}
     uses: ./.github/workflows/docker-build.yml
     with:
-      image_name: aistorage/ais-util
+      image_name: aaronnw/ais-util
       image_tag: ${{ inputs.image_tag }}
       context_dir: deploy/prod/k8s/aisutil_container
     secrets:
@@ -120,7 +120,7 @@ jobs:
     if: ${{ inputs.build_cluster_minimal_image }}
     uses: ./.github/workflows/docker-build.yml
     with:
-      image_name: aistorage/cluster-minimal
+      image_name: aaronnw/cluster-minimal
       image_tag: ${{ inputs.image_tag }}
       context_dir: deploy/prod/docker/single
     secrets:
@@ -131,7 +131,7 @@ jobs:
     if: ${{ inputs.build_gitlab_ci_image }}
     uses: ./.github/workflows/docker-build.yml
     with:
-      image_name: aistorage/gitlab-ci
+      image_name: aaronnw/gitlab-ci
       image_tag: ${{ inputs.image_tag }}
       context_dir: deploy/ci
     secrets:

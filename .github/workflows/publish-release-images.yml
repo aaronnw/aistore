@@ -11,26 +11,26 @@ jobs:
       matrix:
         include:
           # aisnode
-          - image_name: aistorage/aisnode
+          - image_name: aaronnw/aisnode
             image_tag: ${{ github.ref_name }}
             context_dir: deploy/prod/k8s/aisnode_container
-          - image_name: aistorage/aisnode
+          - image_name: aaronnw/aisnode
             image_tag: latest
             context_dir: deploy/prod/k8s/aisnode_container
           # aisnode tracing
-          - image_name: aistorage/aisnode
+          - image_name: aaronnw/aisnode
             image_tag: ${{ github.ref_name }}-oteltracing
             context_dir: deploy/prod/k8s/aisnode_container
             build_tags: oteltracing
-          - image_name: aistorage/aisnode
+          - image_name: aaronnw/aisnode
             image_tag: latest-oteltracing
             context_dir: deploy/prod/k8s/aisnode_container
             build_tags: oteltracing
           # ais-init
-          - image_name: aistorage/ais-init
+          - image_name: aaronnw/ais-init
             image_tag: ${{ github.ref_name }}
             context_dir: deploy/prod/k8s/aisinit_container
-          - image_name: aistorage/ais-init
+          - image_name: aaronnw/ais-init
             image_tag: latest
             context_dir: deploy/prod/k8s/aisinit_container
     uses: ./.github/workflows/docker-build.yml
